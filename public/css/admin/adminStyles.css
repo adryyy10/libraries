@@ -1,0 +1,59 @@
+body {
+    font-family: "Lato", sans-serif;
+  }
+
+  .sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #343a40;
+    overflow-x: hidden;
+    padding-top: 0px;
+    font-size: 16px;
+  }
+  
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    display: block;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  .brand-link{
+    display: block;
+    line-height: 1.5;
+    padding: .8125rem .5rem !important  ;
+    transition: width .3s ease-in-out;
+    white-space: nowrap;
+    border-bottom: 1px solid #4b545c;
+    color: rgba(255,255,255,.8);
+  }
+
+  .brand-link .brand-image{
+    float: left;
+    line-height: .8;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    margin-top: -3px;
+    max-height: 33px;
+    width: auto;
+  }
+  
+  .main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 16px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 16px;}
+  }
