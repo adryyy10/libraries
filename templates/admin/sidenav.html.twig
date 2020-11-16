@@ -9,9 +9,46 @@
           style="opacity: .8">
     <span class="brand-text font-weight-light">Suma TD</span>
   </a>
-  <a href="#usuarios">Usuarios</a>
-  <a href="#bibliotecas">Bibliotecas</a>
-  <a href="#libros">Libros</a>
+  <!-- Sidebar Menu -->
+  <nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <li class="nav-item has-treeview" id="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fa fa-user"></i>
+          <p class="nav-link-p">
+            Usuarios
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav-treeview" id="nav-treeview" style="display:none;">
+          <li class="nav-item">
+            <a href="{{ path('list')}}" class="nav-link">
+              <i class="fa fa-circle-thin nav-icon"></i>
+              <p class="nav-p">List</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fa fa-building"></i>
+          <p class="nav-link-p">
+            Bibliotecas
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+      </li>
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fa fa-book"></i>
+          <p class="nav-link-p">
+            Libros
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
 
 {% endblock %}
