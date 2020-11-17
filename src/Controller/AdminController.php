@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends AbstractController
 {
@@ -15,20 +17,20 @@ class AdminController extends AbstractController
      */
     public function adminDashboard(): Response
     {
-        return $this->render('admin/index.html.twig', [
+        return $this->render('admin/users/index.html.twig', [
             'controller_name' => 'AdminController',
         ]);
     }
 
     /**
-     * @Route("/list", name="list")
+     * @Route("/list_users", name="list_users")
      */
     public function list(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Usuario::class);
         $usuarios = $repository->findAll();
 
-        return $this->render('admin/list.html.twig', [
+        return $this->render('admin/users/list.html.twig', [
             'usuarios' => $usuarios,
         ]);
     }
@@ -38,7 +40,7 @@ class AdminController extends AbstractController
      */
     public function new_user(): Response
     {
-        return $this->render('admin/new-user.html.twig', [
+        return $this->render('admin/users/new-user.html.twig', [
 
         ]);
     }
@@ -46,12 +48,12 @@ class AdminController extends AbstractController
     /**
      * @Route("/add_new_user", name="add_new_user"). methods={"POST"}
      */
-    public function add_new_user(): Response
+    public function add_new_user(UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $usuario = new Usuario;
         $usuario->setNombre($_POST['nombre']);
         $usuario->setUsername($_POST['username']);
-        $usuario->setPassword($_POST['password']);
+        $usuario->setPassword($passwordEncoder->encodePassword($usuario,$_POST['password']));
         $usuario->setRoles(array($_POST['roles']));
         $usuario->setCreatedAt(new \DateTime());
         $usuario->setUpdatedAt(new \DateTime());
@@ -60,7 +62,7 @@ class AdminController extends AbstractController
         $entityManager->persist($usuario);
         $entityManager->flush();
 
-        return $this->redirectToRoute('list');
+        return $this->redirectToRoute('list_users');
     }
 
     /**
@@ -71,7 +73,7 @@ class AdminController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $usuario = $entityManager->getRepository(Usuario::class)->find($id);
 
-        return $this->render('admin/new-user.html.twig', [
+        return $this->render('admin/users/new-user.html.twig', [
             "id" => $id,
             "usuario" => $usuario
         ]);
@@ -80,7 +82,7 @@ class AdminController extends AbstractController
     /**
      * @Route("update_user/{id}", name="update_user"), methods={"POST"}
      */
-    public function updateUser($id): Response
+    public function updateUser($id, UserPasswordEncoderInterface $passwordEncoder): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -88,14 +90,14 @@ class AdminController extends AbstractController
 
         $usuario->setNombre($_POST['nombre']);
         $usuario->setUsername($_POST['username']);
-        $usuario->setPassword($_POST['password']);
+        $usuario->setPassword($passwordEncoder->encodePassword($usuario,$_POST['password']));
         $usuario->setRoles(array($_POST['roles']));
         $usuario->setUpdatedAt(new \DateTime());
 
         $entityManager->flush();
 
         // redirects to the "list" route
-        return $this->redirectToRoute('list');
+        return $this->redirectToRoute('list_users');
     }
 
     /**
@@ -110,6 +112,6 @@ class AdminController extends AbstractController
         $entityManager->remove($usuario);
         $entityManager->flush();
 
-        return $this->redirectToRoute('list');
+        return $this->redirectToRoute('list_users');
     }
 }
