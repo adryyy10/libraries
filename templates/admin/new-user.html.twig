@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listing users{% endblock %}
+
+{% block body %}
+    {% include 'admin/sidenav.html.twig' %}
+
+    <div class="main">
+        <form {% if usuario is defined %} action="{{ path('update_user', {'id': usuario.id}) }}"{% else %}action="{{ path('add_new_user') }}" {% endif %} class="new-user" method="POST">
+            <div class="container">
+                
+                <div class="row">
+                    <div class="offset-2 col-4">
+                        <label>Nombre</label>
+                        <input type="text" name="nombre" {% if usuario is defined %}value="{{usuario.nombre}}"{% endif %} class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col-4">
+                        <label>Username</label>
+                        <input type="text" name="username"  {% if usuario is defined %}value="{{usuario.username}}"{% endif %} class="form-control" placeholder="Username">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-2 col-4">
+                        <label>Contraseña</label>
+                        <input type="password" name="password" class="form-control" placeholder="Contraseña">
+                    </div>
+                    <div class="col-4">
+                        <label>Rol</label>
+                        <select name="roles" id="roles" class="form-control">
+                            <option selected disabled>Seleccione un rol</option>
+                            <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                            <option value="ROLE_LIBRARIAN">ROLE_LIBRARIAN</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-2 col-8">
+                        <button type="submit" class="btn btn-primary button-create-user"> {% if usuario is defined%} Actualizar usuario {% else %}Crear usuario{% endif %}</button>
+                    </div>
+                    
+                </div>
+            </div> 
+        </form>
+    </div>
+
+{% endblock %}

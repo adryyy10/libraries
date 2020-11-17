@@ -78,7 +78,7 @@ class Usuario implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_LIBRARIAN';
+        //$roles[] = 'ROLE_LIBRARIAN';
 
         return array_unique($roles);
     }

@@ -27,8 +27,8 @@ class UsuarioFixtures extends Fixture
             '1234'
         ));
         $usuario->setRoles(array('ROLE_ADMIN'));
-        $usuario->setCreatedAt(new DateTime());
-        $usuario->setUpdatedAt(new DateTime());
+        $usuario->setCreatedAt(new \DateTime());
+        $usuario->setUpdatedAt(new \DateTime());
         $manager->persist($usuario);
 
         $usuario2 = new Usuario();
@@ -39,8 +39,8 @@ class UsuarioFixtures extends Fixture
             '1234'
         ));
         $usuario2->setRoles(array('ROLE_LIBRARIAN'));
-        $usuario2->setCreatedAt(new DateTime());
-        $usuario2->setUpdatedAt(new DateTime());
+        $usuario2->setCreatedAt(new \DateTime());
+        $usuario2->setUpdatedAt(new \DateTime());
         $manager->persist($usuario2);
 
 

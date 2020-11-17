@@ -6,13 +6,57 @@
 {% include 'admin/sidenav.html.twig' %}
 
 <div class="main">
-  <h2>Sidebar</h2>
-  <p>This sidebar is of full height (100%) and always shown.</p>
-  <p>Scroll down the page to see the result.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+    <table id="table_id" class="table display">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Username</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Creado</th>
+                <th scope="col">Actualizado</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <th scope="row">{{ usuario.id }}</th>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.username }}</td>
+                    <td>{{ usuario.roles|join }}</td>
+                    <td>{{ usuario.createdAt|date("d/m/Y H:i:s") }}</td>
+                    <td>{{ usuario.updatedAt|date("d/m/Y H:i:s") }}</td>
+                    <td><a class="btn btn-outline-primary btn-sm" href="{{ path('form_update_user', {'id': usuario.id}) }}">Editar</a></td>
+                    <!--td><button type="button" class="btn btn-outline-danger btn-sm deleteUser" data-toggle="modal" data-target="#exampleModalCenter">Borrar</button></td-->
+                    <td><a class="btn btn-outline-danger btn-sm" href="{{ path('user_delete', {'id': usuario.id}) }}">Borrar</a></td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Borrar usuario </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Confirme que desea borrar el usuario
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Borrar</button>
+        </div>
+        </div>
+    </div>
+    </div>
 </div>
 
 {% endblock %}

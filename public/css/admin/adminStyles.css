@@ -1,5 +1,8 @@
 body {
     font-family: "Lato", sans-serif;
+    align-items: center;
+    min-height: 100vh;
+    background: #eceffc;
   }
 
   .sidenav {
@@ -86,8 +89,78 @@ body {
   .main {
     margin-left: 160px; /* Same as the width of the sidenav */
     font-size: 16px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
+    padding: 15px 10px;
   }
+  .href-delete{
+    text-decoration: none;
+    color: blue;
+  }
+
+  .href-delete{
+    text-decoration: none;
+    color: red;
+  }
+
+  .btn-outline-danger a:hover, .btn-outline-primary a:hover{
+    color: white;
+    text-decoration: none;
+  }
+
+  .table th, .table td{
+    vertical-align: inherit;
+  }
+
+  .main-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #eceffc;
+  }
+  .btn-ghost {
+    padding: 8px 20px;
+    overflow: hidden;
+  }
+  .btn-ghost:hover {
+    background: transparent;
+    box-shadow: 0 0 20px 10px rgba(51, 152, 219, 0.5);
+  }
+  .form-input-material {
+    --input-default-border-color: white;
+    --input-border-bottom-color: white;
+  }
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 40px;
+    color: white;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0.4px 0.4px rgba(128, 128, 128, 0.109), 0 1px 1px rgba(128, 128, 128, 0.155), 0 2.1px 2.1px rgba(128, 128, 128, 0.195), 0 4.4px 4.4px rgba(128, 128, 128, 0.241), 0 12px 12px rgba(128, 128, 128, 0.35);
+  }
+  .login-form h1 {
+    margin: 0 0 24px 0;
+  }
+  .login-form .form-input-material {
+    margin: 12px 0;
+  }
+  .login-form .btn {
+    width: 100%;
+    margin: 18px 0 9px 0;
+    border-radius: .25rem;
+  }
+  .new-user .row{
+    margin-bottom: 15px;
+  }
+  .button-create-user{
+    float: right;
+  }
+
+    
+
+
+  
   
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
