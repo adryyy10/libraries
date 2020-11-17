@@ -6,7 +6,7 @@
 {% include 'admin/sidenav.html.twig' %}
 
 <div class="main">
-    <table id="table_id" class="table display">
+    <table id="table_bibliotecas" class="table display">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -26,7 +26,7 @@
                     <td>{% if biblioteca.updatedAt is defined and biblioteca.updatedAt is not null %} {{ biblioteca.updatedAt|date("d/m/Y H:i:s") }} {% else %} Sin actualizar {% endif %}</td>
                     <td><a class="btn btn-outline-primary btn-sm" href="{{ path('form_update_biblioteca', {'id': biblioteca.id}) }}">Editar</a></td>
                     <td><a class="btn btn-outline-danger btn-sm" href="{{ path('biblioteca_delete', {'id': biblioteca.id}) }}">Borrar</a></td>
-                    
+
                 </tr>
             {% endfor %}
         </tbody>

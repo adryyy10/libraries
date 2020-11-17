@@ -156,6 +156,26 @@ body {
   .button-create{
     float: right;
   }
+  .dt-buttons{
+    display: inline-block;
+  }
+  .dt-button{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    text-align: center;
+    text-decoration: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  .dt-button:hover{
+    background-color: #eceffc;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+  }
 
     
 
