@@ -6,9 +6,8 @@
     {% include 'admin/sidenav.html.twig' %}
 
     <div class="main">
-        <form {% if usuario is defined %} action="{{ path('update_user', {'id': usuario.id}) }}"{% else %}action="{{ path('add_new_user') }}" {% endif %} class="new-user" method="POST">
+        <form {% if usuario is defined %} action="{{ path('update_user', {'id': usuario.id}) }}"{% else %}action="{{ path('add_new_user') }}" {% endif %} class="new-form" method="POST">
             <div class="container">
-                
                 <div class="row">
                     <div class="offset-2 col-4">
                         <label>Nombre</label>
@@ -35,7 +34,7 @@
                 </div>
                 <div class="row">
                     <div class="offset-2 col-8">
-                        <button type="submit" class="btn btn-primary button-create-user"> {% if usuario is defined%} Actualizar usuario {% else %}Crear usuario{% endif %}</button>
+                        <button type="submit" class="btn btn-primary button-create"> {% if usuario is defined%} Actualizar usuario {% else %}Crear usuario{% endif %}</button>
                     </div>
                     
                 </div>

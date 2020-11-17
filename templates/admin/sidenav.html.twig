@@ -12,7 +12,7 @@
   <!-- Sidebar Menu -->
   <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-      <li class="nav-item has-treeview" id="nav-item">
+      <li class="nav-item has-treeview" id="nav-item-users">
         <a href="#" class="nav-link">
           <i class="nav-icon fa fa-user"></i>
           <p class="nav-link-p">
@@ -20,7 +20,7 @@
             <i class="right fa fa-angle-left"></i>
           </p>
         </a>
-        <ul class="nav-treeview" id="nav-treeview" style="display:none;">
+        <ul class="nav-treeview" id="nav-treeview-users" style="display:none;">
           <li class="nav-item">
             <a href="{{ path('list_users')}}" class="nav-link">
               <i class="fa fa-circle-thin nav-icon"></i>
@@ -35,7 +35,7 @@
           </li>
         </ul>
       </li>
-      <li class="nav-item has-treeview">
+      <li class="nav-item has-treeview" id="nav-item-biblioteca">
         <a href="#" class="nav-link">
           <i class="nav-icon fa fa-building"></i>
           <p class="nav-link-p">
@@ -43,6 +43,20 @@
             <i class="right fa fa-angle-left"></i>
           </p>
         </a>
+        <ul class="nav-treeview" id="nav-treeview-biblioteca" style="display:none;">
+          <li class="nav-item">
+            <a href="{{ path('list_bibliotecas')}}" class="nav-link">
+              <i class="fa fa-circle-thin nav-icon"></i>
+              <p class="nav-p">List</p>
+            </a>
+          </li>
+                    <li class="nav-item">
+            <a href="{{ path('form_new_biblioteca')}}" class="nav-link">
+              <i class="fa fa-circle-thin nav-icon"></i>
+              <p class="nav-p">Nueva</p>
+            </a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">

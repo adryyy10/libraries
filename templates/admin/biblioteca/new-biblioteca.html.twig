@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listing biblioteca{% endblock %}
+
+{% block body %}
+    {% include 'admin/sidenav.html.twig' %}
+
+    <div class="main">
+        <form {% if biblioteca is defined %} action="{{ path('update_biblioteca', {'id': biblioteca.id}) }}"{% else %}action="{{ path('add_new_biblioteca') }}" {% endif %} class="new-form" method="POST">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-4 col-4">
+                        <label>Nombre</label>
+                        <input type="text" name="nombre" {% if biblioteca is defined %}value="{{biblioteca.nombre}}"{% endif %} class="form-control" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-4 col-4">
+                        <button type="submit" class="btn btn-primary button-create"> {% if biblioteca is defined%} Actualizar biblioteca {% else %}Crear biblioteca{% endif %}</button>
+                    </div>
+                </div>
+            </div> 
+        </form>
+    </div>
+
+{% endblock %}
