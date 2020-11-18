@@ -15,7 +15,7 @@
                 <th scope="col">Idioma</th>
                 <th scope="col">Creado por</th>
                 <th scope="col">Creado</th>
-                <th scope="col">Actualizado</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
                     <td>{{ prestamo.idioma }}</td>
                     <td>{{ prestamo.createdBy.nombre }}</td>
                     <td>{{ prestamo.createdAt|date("d/m/Y H:i:s") }}</td>
-                    <td>{% if prestamo.updatedAt is defined and prestamo.updatedAt is not null %} {{ prestamo.updatedAt|date("d/m/Y H:i:s") }} {% else %} Sin actualizar {% endif %}</td>
+                    <td><a class="btn btn-outline-danger btn-sm" href="{{ path('prestamo_cancelar', {'id': prestamo.id}) }}">Cancelar</a></td>
                 </tr>
             {% endfor %}
         </tbody>

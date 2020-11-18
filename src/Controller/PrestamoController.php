@@ -96,54 +96,18 @@ class PrestamoController extends AbstractController
         ]);
     }
 
-
     /**
-     * @Route("/edit_user/{id}", name="form_update_user")
+     * @Route("/prestamo/cancelar/{id}", name="prestamo_cancelar")
      */
-    public function updateUserForm($id): Response
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $usuario = $entityManager->getRepository(Usuario::class)->find($id);
-
-        return $this->render('admin/users/new-user.html.twig', [
-            "id" => $id,
-            "usuario" => $usuario
-        ]);
-    }
-
-    /**
-     * @Route("update_user/{id}", name="update_user"), methods={"POST"}
-     */
-    public function updateUser($id, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $usuario = $entityManager->getRepository(Usuario::class)->find($id);
-
-        $usuario->setNombre($_POST['nombre']);
-        $usuario->setUsername($_POST['username']);
-        $usuario->setPassword($passwordEncoder->encodePassword($usuario,$_POST['password']));
-        $usuario->setRoles(array($_POST['roles']));
-        $usuario->setUpdatedAt(new \DateTime());
-
-        $entityManager->flush();
-
-        // redirects to the "list" route
-        return $this->redirectToRoute('list_users');
-    }
-
-    /**
-     * @Route("/adminDashboard/delete/{id}", name="user_delete")
-     */
-    public function delete($id): Response
+    public function cancelar($id): Response
     {
         
         $entityManager = $this->getDoctrine()->getManager();
-        $usuario = $entityManager->getRepository(Usuario::class)->find($id);
+        $prestamo = $entityManager->getRepository(Prestamo::class)->find($id);
 
-        $entityManager->remove($usuario);
+        $entityManager->remove($prestamo);
         $entityManager->flush();
 
-        return $this->redirectToRoute('list_users');
+        return $this->redirectToRoute('prestamos');
     }
 }

@@ -41,7 +41,7 @@
                         <select class="form-control" name="libro" required>
                             <option value="" selected disabled>Seleccione un libro</option>
                             {% for libro in libros %}
-                                <option value="{{libro.id}}">{{libro.titulo}}</option>
+                                <option value="{{libro.id}}" class="{{libro.biblioteca.id}}">{{libro.titulo}}</option>
                             {% endfor %}
                         </select>
                     </div>
