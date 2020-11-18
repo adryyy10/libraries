@@ -3,9 +3,16 @@
 {% block title %}List préstamos{% endblock %}
 
 {% block body %}
-
-<h3>{{mensaje}}</h3>
-
-Hi {{ nombre }}! has reservado un libro con éxito.
-
+    <div class="container container-prestamo">
+        <div class="row">
+            <div class="offset-1 col-8">
+                <h3>{{mensaje}}</h3> 
+            </div> 
+        </div>
+        <div class="row">
+            <div class="offset-1 col-8">
+                <a class="btn btn-outline-primary btn-sm" href="{{ path('prestamos') }}">Ver préstamos</a>
+            </div>    
+        </div>
+    </div>
 {% endblock %}

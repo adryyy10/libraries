@@ -179,12 +179,10 @@ body {
   #errorTitulo, #errorBiblioteca{
     color: red;
   }
-
-    
-
-
-  
-  
+  .container-prestamo{
+    float: right;
+    padding: 50px 40px;
+  }
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 16px;}
