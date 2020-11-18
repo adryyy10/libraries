@@ -8,4 +8,5 @@ Set up:
 A partir de aquí tenemos dos vertientes en el login:
 - Backoffice: user= Adryyy10 password= 1234
 - FrontOffice: user= AdryyyLibrarian password= 1234
- 
+
+Para poder cambiar de Backoffice a FrontOffice y viceversa primero tendremos que hacer logout en http://127.0.0.1:8000/logout 
