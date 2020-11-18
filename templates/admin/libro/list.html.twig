@@ -11,6 +11,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Titulo</th>
+                <th scope="col">Biblioteca</th>
                 <th scope="col">Creado</th>
                 <th scope="col">Actualizado</th>
                 <th scope="col"></th>
@@ -22,6 +23,7 @@
                 <tr>
                     <th scope="row">{{ libro.id }}</th>
                     <td>{{ libro.titulo }}</td>
+                    <td>{{ libro.biblioteca.nombre }}</td>
                     <td>{{ libro.createdAt|date("d/m/Y H:i:s") }}</td>
                     <td>{% if libro.updatedAt is defined and libro.updatedAt is not null %} {{ libro.updatedAt|date("d/m/Y H:i:s") }} {% else %} Sin actualizar {% endif %}</td>
                     <td><a class="btn btn-outline-primary btn-sm" href="{{ path('form_update_libro', {'id': libro.id}) }}">Editar</a></td>

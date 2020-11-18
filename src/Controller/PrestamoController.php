@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class PrestamoController extends AbstractController
 {
@@ -34,7 +33,7 @@ class PrestamoController extends AbstractController
     /**
      * @Route("/add_new_prestamo", name="add_new_prestamo"). methods={"POST"}
      */
-    public function add_new_prestamo(UserInterface $user): Response
+    public function add_new_prestamo(\Swift_Mailer $mailer): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -54,7 +53,27 @@ class PrestamoController extends AbstractController
         $entityManager->persist($prestamo);
         $entityManager->flush();
 
-        return $this->redirectToRoute('list_prestamos');
+        //IDIOMA MENSAJE
+        $mensaje = "Libro reservado correctamente: " . $prestamo->getLibro()->getTitulo();
+
+        //ENVÍO DE EMAIL
+        $message = (new \Swift_Message("Hola que tal"))
+        ->setFrom('pruebatecnicatd@gmail.com')
+        ->setTo($_POST['email'])
+        ->setBody(
+            $this->renderView(
+                'emails/prestamo.html.twig',
+                [
+                    'nombre' => $_POST['nombre'], 
+                    'mensaje' => $mensaje 
+                ],
+                
+            ),
+            'text/html'
+        );
+        $mailer->send($message);
+
+        return $this->redirectToRoute('prestamos');
     }
 
 

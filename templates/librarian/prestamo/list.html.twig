@@ -4,14 +4,16 @@
 
 {% block body %}
 
-<div class="main">
+<div class="main-prestamo">
     <table id="table_libros" class="table display">
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Libro</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Email</th>
                 <th scope="col">Idioma</th>
+                <th scope="col">Creado por</th>
                 <th scope="col">Creado</th>
                 <th scope="col">Actualizado</th>
             </tr>
@@ -20,9 +22,11 @@
             {% for prestamo in prestamos %}
                 <tr>
                     <th scope="row">{{ prestamo.id }}</th>
+                    <td>{{ prestamo.libro.titulo }}</td>
                     <td>{{ prestamo.nombre }}</td>
                     <td>{{ prestamo.email }}</td>
                     <td>{{ prestamo.idioma }}</td>
+                    <td>{{ prestamo.createdBy.nombre }}</td>
                     <td>{{ prestamo.createdAt|date("d/m/Y H:i:s") }}</td>
                     <td>{% if prestamo.updatedAt is defined and prestamo.updatedAt is not null %} {{ prestamo.updatedAt|date("d/m/Y H:i:s") }} {% else %} Sin actualizar {% endif %}</td>
                 </tr>

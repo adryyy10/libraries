@@ -30,10 +30,6 @@ class LibroController extends AbstractController
 
         $repository = $this->getDoctrine()->getRepository(Biblioteca::class);
         $bibliotecas = $repository->findAll();
-        
-
-
-        //echo '<pre>'; var_dump($libros); echo '</pre>';die();
 
         return $this->render('admin/libro/list.html.twig', [
             'libros' => $libros,
