@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New préstamo{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <form action="{{ path('add_new_prestamo') }}" class="new-form" method="POST">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-1 col-4">
+                        <label>Nombre</label>
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
+                    </div>
+                    <div class="col-4">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-1 col-4">
+                        <label>Idioma</label>
+                        <select name="language" id="language" class="form-control" required>
+                            <option selected disabled>Seleccione un idioma</option>
+                            <option value="Español">Español</option>
+                            <option value="Catalan">Catalán</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label>Biblioteca</label>
+                        <select class="form-control" name="biblioteca" required>
+                            <option value="" selected disabled>Seleccione una biblioteca</option>
+                            {% for biblioteca in bibliotecas %}
+                                <option value="{{biblioteca.id}}">{{biblioteca.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-1 col-4">
+                        <label>Libros</label>
+                        <select class="form-control" name="libro" required>
+                            <option value="" selected disabled>Seleccione un libro</option>
+                            {% for libro in libros %}
+                                <option value="{{libro.id}}">{{libro.titulo}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-1 col-8">
+                        <button type="submit" class="btn btn-primary button-create"> Crear préstamo</button>
+                    </div>
+                    
+                </div>
+            </div> 
+        </form>
+    </div>
+
+{% endblock %}

@@ -40,4 +40,4 @@ security:
     access_control:
         - { path: ^/adminDashboard, roles: ROLE_ADMIN }
         - { path: ^/list, roles: ROLE_ADMIN }
-        - { path: ^/list_librarian, roles: ROLE_LIBRARIAN }
+        - { path: ^/new_prestamo, roles: ROLE_LIBRARIAN }

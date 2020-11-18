@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List préstamos{% endblock %}
+
+{% block body %}
+
+<div class="main">
+    <table id="table_libros" class="table display">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+                <th scope="col">Idioma</th>
+                <th scope="col">Creado</th>
+                <th scope="col">Actualizado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prestamo in prestamos %}
+                <tr>
+                    <th scope="row">{{ prestamo.id }}</th>
+                    <td>{{ prestamo.nombre }}</td>
+                    <td>{{ prestamo.email }}</td>
+                    <td>{{ prestamo.idioma }}</td>
+                    <td>{{ prestamo.createdAt|date("d/m/Y H:i:s") }}</td>
+                    <td>{% if prestamo.updatedAt is defined and prestamo.updatedAt is not null %} {{ prestamo.updatedAt|date("d/m/Y H:i:s") }} {% else %} Sin actualizar {% endif %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -48,6 +50,16 @@ class Usuario implements UserInterface
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Prestamo::class, mappedBy="createdBy")
+     */
+    private $prestamo_id;
+
+    public function __construct()
+    {
+        $this->prestamo_id = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,6 +166,36 @@ class Usuario implements UserInterface
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Prestamo[]
+     */
+    public function getPrestamoId(): Collection
+    {
+        return $this->prestamo_id;
+    }
+
+    public function addPrestamoId(Prestamo $prestamoId): self
+    {
+        if (!$this->prestamo_id->contains($prestamoId)) {
+            $this->prestamo_id[] = $prestamoId;
+            $prestamoId->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrestamoId(Prestamo $prestamoId): self
+    {
+        if ($this->prestamo_id->removeElement($prestamoId)) {
+            // set the owning side to null (unless already changed)
+            if ($prestamoId->getCreatedBy() === $this) {
+                $prestamoId->setCreatedBy(null);
+            }
+        }
 
         return $this;
     }

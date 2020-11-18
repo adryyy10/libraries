@@ -18,7 +18,7 @@ class SecurityController extends AbstractController
             if($this->getUser()->getRoles()[0] == 'ROLE_ADMIN'){
                 return $this->redirectToRoute('adminDashboard');
             }
-            return $this->redirectToRoute('librarian_dashboard');
+            return $this->redirectToRoute('new_prestamo');
         }
 
         // get the login error if there is one

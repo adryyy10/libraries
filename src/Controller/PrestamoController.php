@@ -2,66 +2,76 @@
 
 namespace App\Controller;
 
+use App\Entity\Biblioteca;
+use App\Entity\Libro;
+use App\Entity\Prestamo;
 use App\Entity\Usuario;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class AdminController extends AbstractController
+class PrestamoController extends AbstractController
 {
     /**
-     * @Route("/adminDashboard", name="adminDashboard")
+     * @Route("/new_prestamo", name="new_prestamo")
      */
-    public function adminDashboard(): Response
+    public function new_prestamo(): Response
     {
-        return $this->render('admin/users/index.html.twig', [
-            'controller_name' => 'AdminController',
+        $repository = $this->getDoctrine()->getRepository(Biblioteca::class);
+        $bibliotecas = $repository->findAll();
+
+        $repository = $this->getDoctrine()->getRepository(Libro::class);
+        $libros = $repository->findAll();
+
+        return $this->render('librarian/prestamo/new-prestamo.html.twig', [
+            "bibliotecas" => $bibliotecas,
+            "libros" => $libros,
         ]);
     }
 
     /**
-     * @Route("/list_users", name="list_users")
+     * @Route("/add_new_prestamo", name="add_new_prestamo"). methods={"POST"}
      */
-    public function list(): Response
+    public function add_new_prestamo(UserInterface $user): Response
     {
-        $repository = $this->getDoctrine()->getRepository(Usuario::class);
-        $usuarios = $repository->findAll();
-
-        return $this->render('admin/users/list.html.twig', [
-            'usuarios' => $usuarios,
-        ]);
-    }
-
-    /**
-     * @Route("/new_user", name="form_new_user")
-     */
-    public function new_user(): Response
-    {
-        return $this->render('admin/users/new-user.html.twig', [
-
-        ]);
-    }
-
-    /**
-     * @Route("/add_new_user", name="add_new_user"). methods={"POST"}
-     */
-    public function add_new_user(UserPasswordEncoderInterface $passwordEncoder): Response
-    {
-        $usuario = new Usuario;
-        $usuario->setNombre($_POST['nombre']);
-        $usuario->setUsername($_POST['username']);
-        $usuario->setPassword($passwordEncoder->encodePassword($usuario,$_POST['password']));
-        $usuario->setRoles(array($_POST['roles']));
-        $usuario->setCreatedAt(new \DateTime());
-        $usuario->setUpdatedAt(new \DateTime());
 
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($usuario);
+        $libro = $entityManager->getRepository(Libro::class)->find($_POST['libro']);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $usuario = $entityManager->getRepository(Usuario::class)->find($this->get('security.token_storage')->getToken()->getUser());
+
+        $prestamo = new Prestamo;
+        $prestamo->setNombre($_POST['nombre']);
+        $prestamo->setEmail($_POST['email']);
+        $prestamo->setLibro($libro);
+        $prestamo->setIdioma($_POST['language']);
+        $prestamo->setCreatedBy($usuario);
+        $prestamo->setCreatedAt(new \DateTime());
+
+        $entityManager->persist($prestamo);
         $entityManager->flush();
 
-        return $this->redirectToRoute('list_users');
+        return $this->redirectToRoute('list_prestamos');
     }
+
+
+
+    /**
+     * @Route("/prestamos", name="prestamos")
+     */
+    public function prestamos(): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Prestamo::class);
+        $prestamos = $repository->findAll();
+
+        return $this->render('librarian/prestamo/list.html.twig', [
+            'prestamos' => $prestamos,
+        ]);
+    }
+
 
     /**
      * @Route("/edit_user/{id}", name="form_update_user")
