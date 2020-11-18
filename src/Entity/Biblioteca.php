@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BibliotecaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class Biblioteca
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Libro::class, mappedBy="biblioteca", cascade={"persist"})
+     */
+    private $libros;
+
+    public function __construct()
+    {
+        $this->libros = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,36 @@ class Biblioteca
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Libro[]
+     */
+    public function getLibros(): Collection
+    {
+        return $this->libros;
+    }
+
+    public function addLibro(Libro $libro): self
+    {
+        if (!$this->libros->contains($libro)) {
+            $this->libros[] = $libro;
+            $libro->setBiblioteca($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLibro(Libro $libro): self
+    {
+        if ($this->libros->removeElement($libro)) {
+            // set the owning side to null (unless already changed)
+            if ($libro->getBiblioteca() === $this) {
+                $libro->setBiblioteca(null);
+            }
+        }
 
         return $this;
     }

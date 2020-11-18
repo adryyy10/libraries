@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listing libros{% endblock %}
+
+{% block body %}
+{% include 'admin/sidenav.html.twig' %}
+
+<div class="main">
+    <table id="table_libros" class="table display">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Creado</th>
+                <th scope="col">Actualizado</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for libro in libros %}
+                <tr>
+                    <th scope="row">{{ libro.id }}</th>
+                    <td>{{ libro.titulo }}</td>
+                    <td>{{ libro.createdAt|date("d/m/Y H:i:s") }}</td>
+                    <td>{% if libro.updatedAt is defined and libro.updatedAt is not null %} {{ libro.updatedAt|date("d/m/Y H:i:s") }} {% else %} Sin actualizar {% endif %}</td>
+                    <td><a class="btn btn-outline-primary btn-sm" href="{{ path('form_update_libro', {'id': libro.id}) }}">Editar</a></td>
+                    <td><a class="btn btn-outline-danger btn-sm" href="{{ path('libro_delete', {'id': libro.id}) }}">Borrar</a></td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

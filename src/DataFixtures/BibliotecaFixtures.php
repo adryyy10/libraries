@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class BibliotecaFixtures extends Fixture
 {
+    public const BIBLIOTECA_REFERENCE = 'biblioteca-';
 
     public function load(ObjectManager $manager)
     {

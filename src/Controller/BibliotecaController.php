@@ -75,7 +75,7 @@ class BibliotecaController extends AbstractController
     /**
      * @Route("update_biblioteca/{id}", name="update_biblioteca"), methods={"POST"}
      */
-    public function updateBilioteca($id): Response
+    public function updateBiblioteca($id): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();

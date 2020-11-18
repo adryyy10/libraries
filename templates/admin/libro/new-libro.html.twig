@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo libro{% endblock %}
+
+{% block body %}
+    {% include 'admin/sidenav.html.twig' %}
+
+    <div class="main">
+        <form name="formLibro" onsubmit="return validateForm()" {% if libro is defined %} action="{{ path('update_libro', {'id': libro.id}) }}"{% else %}action="{{ path('add_new_libro') }}" {% endif %} class="new-form" method="POST">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-2 col-4">
+                        <label>Título</label>
+                        <input type="text" name="titulo" {% if libro is defined %}value="{{libro.titulo}}"{% endif %} class="form-control" placeholder="Titulo">
+                        <p id="errorTitulo"></p>
+                    </div>
+                    <div class="col-4">
+                        <label>Biblioteca</label>
+                        <select class="form-control" name="biblioteca">
+                            <option value="" selected disabled>Seleccione una biblioteca</option>
+                            {% for biblioteca in bibliotecas %}
+                                <option value="{{biblioteca.id}}">{{biblioteca.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                        <p id="errorBiblioteca"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-6 col-4">
+                        <button type="submit" class="btn btn-primary button-create"> {% if libro is defined%} Actualizar libro {% else %}Crear libro{% endif %}</button>
+                    </div>
+                </div>
+            </div> 
+        </form>
+    </div>
+
+{% endblock %}
